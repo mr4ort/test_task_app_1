@@ -1,15 +1,46 @@
-var table = document.querySelector('[data-table]'),
-    tBody =
-    btnClose = document.querySelector('[data-remove-row]');
+(function() {
+  "use strict";
 
-function removeRows() {
- var inputs = table.querySelectorAll('input[type="checkbox"]'),
-     tBody = table.querySelector('tbody'),
-     length = inputs.length;
+  var table = document.querySelector('[data-table]');
+  var btnClose = document.querySelector('[data-remove-row]');
+  var tds = table.querySelectorAll('td');
+  var activeTD;
 
-  while (length--){
-    
+  function removeRows() {
+    var inputs = table.querySelectorAll('input[type="checkbox"]');
+    var length = inputs.length;
+    var tr;
+
+    while (length--){
+      if (inputs[length].checked == true) {
+        tr = inputs[length].closest("tr");
+        tr.remove();
+      }
+    }
   }
-}
 
-btnClose.addEventListener('click', removeRows);
+  function changeDd(e) {
+    var activeTD = e.target;
+    var elTag = target.tagName;
+    var val;
+
+    if (elTag === "TD") {
+      val = activeTD.innerHTML;
+      activeTD.innerHTML = '';
+      var input = document.createElement('input');
+      input.setAttribute('type', 'text');
+      input.setAttribute('value', val);
+      activeTD.appendChild(input);
+    }
+
+
+  }
+  function saveTd() {
+
+  }
+
+  btnClose.addEventListener('click', removeRows);
+  table.addEventListener('dblclick', changeDd);
+})();
+
+
