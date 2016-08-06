@@ -11,11 +11,15 @@
     var inputs = table.querySelectorAll('input[type="checkbox"]');
     var length = inputs.length;
     var tr;
+    var tBody = table.querySelector('tbody');
 
     while (length--){
       if (inputs[length].checked == true) {
-        tr = inputs[length].closest("tr");
-        tr.remove();
+        //tr = inputs[length].closest("tr");
+        // select current row
+        tr = inputs[length].parentElement.parentElement;
+        // remove row
+        tBody.removeChild(tr);
       }
     }
   }
@@ -50,7 +54,8 @@
     input.removeEventListener('dblclick', saveTd);
     input.removeEventListener('blur', saveTd);
     var val = activeTD.querySelector('input').value;
-    activeTD.querySelector('input').remove();
+    //
+    activeTD.removeChild(input);
     activeTD.innerHTML = val;
   }
 
