@@ -2,16 +2,16 @@
   "use strict";
 
   var table = document.querySelector('[data-table]');
+  var tBody = table.querySelector('tbody');
   var btnClose = document.querySelector('[data-remove-row]');
   var tds = table.querySelectorAll('td');
   var activeTD;
-  var input;
 
+  var input;
   function removeRows() {
     var inputs = table.querySelectorAll('input[type="checkbox"]');
     var length = inputs.length;
     var tr;
-    var tBody = table.querySelector('tbody');
 
     while (length--){
       if (inputs[length].checked == true) {
