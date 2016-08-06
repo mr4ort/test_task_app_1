@@ -64,10 +64,11 @@
   function sort(e) {
     if (e.target.tagName !== 'TH') return;
 
-    sortGrid(e.target.cellIndex, e.target.getAttribute('data-sort'));
+    sortTable(e.target.cellIndex, e.target.getAttribute('data-sort'));
   }
 
-  function sortGrid(colNumb, type) {
+  // function for sorting
+  function sortTable(colNumb, type) {
     var tBody = table.querySelector('tbody');
     var rowsArray = [].slice.call(tBody.rows);
     var compare;

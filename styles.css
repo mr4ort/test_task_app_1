@@ -1,28 +1,23 @@
 .header {text-align: center;}
-.header h1 {
-  text-transform: uppercase;
-}
+.header h1 {text-transform: uppercase;}
 .table {
-  margin: 0 auto;
-  border-collapse: collapse;
   border:1px solid rgba(0, 0, 0, 0.4);
+  border-collapse: collapse;
+  margin: 0 auto;
   text-align: center;
 }
-.table thead {
-  background-color: #d6d4d2;
-}
-.table thead tr {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.76);
-}
-.table tbody tr {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.76);
-}
-tbody tr td {
-  border: 1px solid rgba(0, 0, 0, 0.76);
-}
-thead tr th {
-  border: 1px solid rgba(0, 0, 0, 0.76);
-}
-.table thead th {
-  width: 130px;
+.table thead {background-color: #d6d4d2;}
+.table thead tr {border-bottom: 1px solid rgba(0, 0, 0, 0.76);}
+.table tbody tr {border-bottom: 1px solid rgba(0, 0, 0, 0.76);}
+tbody tr td {border: 1px solid rgba(0, 0, 0, 0.76);}
+thead tr th {border: 1px solid rgba(0, 0, 0, 0.76);}
+.table thead th {width: 130px;}
+.btn-holder {text-align: center;}
+.btn {
+  background-color: #d47676;
+  color: #fff;
+  display: inline-block;
+  padding: 5px 10px;
+  text-decoration: none;
+  text-transform: uppercase;
 }
