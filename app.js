@@ -2,14 +2,15 @@
   "use strict";
 
   var table = document.querySelector('[data-table]');
-  var tBody = table.querySelector('tbody');
+  var tHead = table.querySelector('thead');
   var btnClose = document.querySelector('[data-remove-row]');
   var tds = table.querySelectorAll('td');
-  var activeTD;
+  var activeCol;
 
   var input;
   function removeRows() {
     var inputs = table.querySelectorAll('input[type="checkbox"]');
+    var tBody = table.querySelector('tbody');
     var length = inputs.length;
     var tr;
 
@@ -24,43 +25,76 @@
     }
   }
 
-  function changeTd(e) {
+  function changeCol(e) {
     var elTag = e.target.tagName;
+
+    // if click was no on TD element exit
+    if (elTag !== "TD") return;
+
     var val;
     var el;
 
-    if (elTag === "TD") {
-      activeTD = e.target;
-      // save content from html element
-      val = activeTD.innerHTML;
-      // cleaning html element
-      activeTD.innerHTML = '';
-      // create new element input
-      el = document.createElement('input');
-      el.setAttribute('type', 'text');
-      el.setAttribute('value', val);
-      // add input element to TD
-      activeTD.appendChild(el);
-      input = activeTD.querySelector('input');
-      input.focus();
-      // add event Listener
-      input.addEventListener('dblclick', saveTd);
-      input.addEventListener('blur', saveTd);
-    }
+    activeCol = e.target;
+    // save content from html element
+    val = activeCol.innerHTML;
+    // cleaning html element
+    activeCol.innerHTML = '';
+    // create new element input
+    el = document.createElement('input');
+    el.setAttribute('type', 'text');
+    el.setAttribute('value', val);
+    // add input element to TD
+    activeCol.appendChild(el);
+    input = activeCol.querySelector('input');
+    input.focus();
+    // add event Listener
+    input.addEventListener('blur', saveTd);
+
   }
 
   function saveTd() {
     // remove event listener
-    input.removeEventListener('dblclick', saveTd);
     input.removeEventListener('blur', saveTd);
-    var val = activeTD.querySelector('input').value;
+    var val = input.value;
     //
-    activeTD.removeChild(input);
-    activeTD.innerHTML = val;
+    activeCol.removeChild(input);
+    activeCol.innerHTML = val;
+  }
+
+  function sort(e) {
+    if (e.target.tagName !== 'TH') return;
+
+    sortGrid(e.target.cellIndex, e.target.getAttribute('data-sort'));
+  }
+
+  function sortGrid(colNumb, type) {
+    var tBody = table.querySelector('tbody');
+    var rowsArray = [].slice.call(tBody.rows);
+    var compare;
+    switch (type) {
+      case 'number':
+        compare = function(rowA, rowB) {
+          return rowA.cells[colNumb].innerHTML - rowB.cells[colNumb].innerHTML;
+        };
+        break;
+      case 'string':
+        compare = function(rowA, rowB) {
+          return rowA.cells[colNumb].innerHTML > rowB.cells[colNumb].innerHTML ? 1 : -1;
+        };
+        break;
+    }
+    rowsArray.sort(compare);
+    table.removeChild(tBody);
+    tBody = document.createElement('tbody');
+    for (var i = 0; i < rowsArray.length; i++) {
+      tBody.appendChild(rowsArray[i]);
+    }
+    table.appendChild(tBody);
   }
 
   btnClose.addEventListener('click', removeRows);
-  table.addEventListener('dblclick', changeTd);
+  table.addEventListener('dblclick', changeCol);
+  tHead.addEventListener('click', sort);
 })();
 
 
