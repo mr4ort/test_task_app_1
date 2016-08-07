@@ -4,10 +4,9 @@
   var table = document.querySelector('[data-table]');
   var tHead = table.querySelector('thead');
   var btnClose = document.querySelector('[data-remove-row]');
-  var tds = table.querySelectorAll('td');
-  var activeCol;
+  var activeCell;
 
-  var input;
+  // Function for removing checked rows;
   function removeRows() {
     var inputs = table.querySelectorAll('input[type="checkbox"]');
     var tBody = table.querySelector('tbody');
@@ -25,40 +24,45 @@
     }
   }
 
-  function changeCol(e) {
+  function changeCell(e) {
     var elTag = e.target.tagName;
 
     // if click was no on TD element exit
     if (elTag !== "TD") return;
 
-    var val;
-    var el;
-
-    activeCol = e.target;
-    // save content from html element
-    val = activeCol.innerHTML;
-    // cleaning html element
-    activeCol.innerHTML = '';
-    // create new element input
-    el = document.createElement('input');
-    el.setAttribute('type', 'text');
-    el.setAttribute('value', val);
-    // add input element to TD
-    activeCol.appendChild(el);
-    input = activeCol.querySelector('input');
-    input.focus();
-    // add event Listener
-    input.addEventListener('blur', saveTd);
-
+    editCell(e.target.parentElement.rowIndex, e.target.cellIndex);
   }
 
-  function saveTd() {
+  function editCell(rowIndex, colIndex) {
+    activeCell = table.rows[rowIndex].cells[colIndex];
+    var val;
+
+    if (activeCell) {
+      val = activeCell.innerHTML;
+      // clean cell content
+      activeCell.innerHTML = '';
+      // create new element
+      var inputEl = document.createElement('input');
+      inputEl.setAttribute('type', 'text');
+      inputEl.setAttribute('value', val);
+      // add input element to cell
+      activeCell.appendChild(inputEl);
+      // add focus into input;
+      inputEl = activeCell.querySelector('input');
+      inputEl.focus();
+      // add event Listener
+      inputEl.addEventListener('blur', saveCell);
+    }
+  }
+
+  function saveCell() {
     // remove event listener
-    input.removeEventListener('blur', saveTd);
+    var input = activeCell.querySelector('input');
+    input.removeEventListener('blur', saveCell);
     var val = input.value;
     //
-    activeCol.removeChild(input);
-    activeCol.innerHTML = val;
+    activeCell.removeChild(input);
+    activeCell.innerHTML = val;
   }
 
   function sort(e) {
@@ -94,7 +98,7 @@
   }
 
   btnClose.addEventListener('click', removeRows);
-  table.addEventListener('dblclick', changeCol);
+  table.addEventListener('dblclick', changeCell);
   tHead.addEventListener('click', sort);
 })();
 
