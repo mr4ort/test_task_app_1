@@ -1,4 +1,4 @@
-(function() {
+(function () {
   "use strict";
 
   var table = document.querySelector('[data-table]');
@@ -13,7 +13,7 @@
     var length = inputs.length;
     var tr;
 
-    while (length--){
+    while (length--) {
       if (inputs[length].checked == true) {
         //tr = inputs[length].closest("tr");
         // select current row
@@ -66,9 +66,9 @@
   }
 
   function sort(e) {
-    if (e.target.tagName !== 'TH') return;
-
-    sortTable(e.target.cellIndex, e.target.getAttribute('data-sort'));
+    if (e.target.tagName !== 'I') return;
+    var cell = e.target.parentElement;
+    sortTable(cell.cellIndex, cell.getAttribute('data-sort'));
   }
 
   // function for sorting
@@ -78,12 +78,12 @@
     var compare;
     switch (type) {
       case 'number':
-        compare = function(rowA, rowB) {
+        compare = function (rowA, rowB) {
           return rowA.cells[colNumb].innerHTML - rowB.cells[colNumb].innerHTML;
         };
         break;
       case 'string':
-        compare = function(rowA, rowB) {
+        compare = function (rowA, rowB) {
           return rowA.cells[colNumb].innerHTML > rowB.cells[colNumb].innerHTML ? 1 : -1;
         };
         break;

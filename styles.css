@@ -3,7 +3,7 @@
 .table {
   border:1px solid rgba(0, 0, 0, 0.4);
   border-collapse: collapse;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   text-align: center;
 }
 .table thead {background-color: #d6d4d2;}
@@ -20,4 +20,15 @@ thead tr th {border: 1px solid rgba(0, 0, 0, 0.76);}
   padding: 5px 10px;
   text-decoration: none;
   text-transform: uppercase;
+}
+.triangle-down {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #000;
+  cursor: pointer;
+  display: inline-block;
+  height: 0;
+  position: relative;
+  top: -3px;
+  width: 0;
 }
