@@ -1,9 +1,9 @@
 (function () {
   "use strict";
 
-  var table = document.querySelector('[data-table]');
+  var table = document.querySelector('.table');
   var tHead = table.querySelector('thead');
-  var btnClose = document.querySelector('[data-remove-row]');
+  var btnRemove = document.querySelector('.btn-remove');
   var activeCell;
 
   // Function for removing checked rows;
@@ -97,7 +97,7 @@
     table.appendChild(tBody);
   }
 
-  btnClose.addEventListener('click', removeRows);
+  btnRemove.addEventListener('click', removeRows);
   table.addEventListener('dblclick', changeCell);
   tHead.addEventListener('click', sort);
 })();
