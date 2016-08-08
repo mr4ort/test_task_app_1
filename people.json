@@ -1,0 +1,23 @@
+[
+  {
+    "number" : 1,
+    "first-name": "Andrey",
+    "last-name": "Petrov"
+  },
+  {
+    "number" : 2,
+    "first-name": "Boris",
+    "last-name": "Grigorev"
+  },
+  {
+    "number" : 3,
+    "first-name": "Sergey",
+    "last-name": "Kyrchenko"
+  },
+  {
+    "number" : 4,
+    "first-name": "Margarita",
+    "last-name": "Yashkina"
+  }
+]
+
