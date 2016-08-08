@@ -11,13 +11,13 @@
     var inputs = table.querySelectorAll('input[type="checkbox"]');
     var tBody = table.querySelector('tbody');
     var length = inputs.length;
+    var i;
     var tr;
 
-    while (length--) {
-      if (inputs[length].checked == true) {
-        //tr = inputs[length].closest("tr");
+    for ( i = length - 1; i >= 0; i--) {
+      if (inputs[i].checked == true) {
         // select current row
-        tr = inputs[length].parentElement.parentElement;
+        tr = inputs[i].parentElement.parentElement;
         // remove row
         tBody.removeChild(tr);
       }
