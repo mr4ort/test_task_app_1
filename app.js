@@ -5,34 +5,55 @@
   var tHead = table.querySelector('thead');
   var btnRemove = document.querySelector('.btn-remove');
   var activeCell;
+  var people;
 
+  people = [
+    {
+      "first-name": "Andrey",
+      "last-name": "Petrov"
+    },
+    {
+      "first-name": "Boris",
+      "last-name": "Grigorev"
+    },
+    {
+      "first-name": "Sergey",
+      "last-name": "Kyrchenko"
+    },
+    {
+      "first-name": "Margarita",
+      "last-name": "Yashkina"
+    }
+  ];
 
-  function getData() {
-    var xhr = new XMLHttpRequest();
-    var data;
+  function addElementsToTable(el) {
+    if (!el.length) return;
+    var i;
+    var length = el.length;
+    //
+    table.removeChild(table.querySelector('tbody'));
+    var tBody = document.createElement('tbody');
+    //
+    for (i = 0; i < length; i++) {
+      var text;
+      var index = i + 1;
+      var tr = document.createElement('tr');
 
-    xhr.open('GET', "people.json", true);
+      text += '<th>' + index + "</th>";
+      text += '<td>' + el[i]['first-name'] + '</td>';
+      text += '<td>' + el[i]['last-name'] + '</td>';
+      text += '<input type="checkbox">';
 
-    xhr.send();
-
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState != 4) return;
-
-      if (xhr.status != 200) {
-        // обработать ошибку
-        console.log( xhr.status + ': ' + xhr.statusText );
-      } else {
-        try {
-          data = JSON.parse(xhr.responseText);
-        } catch (e) {
-          console.log( "Некорректный ответ " + e.message );
-        }
-        console.log(data);
-      }
-    };
+      tr.innerHTML = text;
+      console.log(tr);
+      tBody.appendChild(tr);
+    }
+    table.appendChild(tBody);
   }
 
-  getData();
+  (function init() {
+    addElementsToTable(people);
+  })();
 
   // Function for removing checked rows;
   function removeRows() {
