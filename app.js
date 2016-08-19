@@ -6,34 +6,6 @@
   var btnRemove = document.querySelector('.btn-remove');
   var activeCell;
 
-
-  function getData() {
-    var xhr = new XMLHttpRequest();
-    var data;
-
-    xhr.open('GET', "people.json", true);
-
-    xhr.send();
-
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState != 4) return;
-
-      if (xhr.status != 200) {
-        // обработать ошибку
-        console.log( xhr.status + ': ' + xhr.statusText );
-      } else {
-        try {
-          data = JSON.parse(xhr.responseText);
-        } catch (e) {
-          console.log( "Некорректный ответ " + e.message );
-        }
-        console.log(data);
-      }
-    };
-  }
-
-  getData();
-
   // Function for removing checked rows;
   function removeRows() {
     var inputs = table.querySelectorAll('input[type="checkbox"]');
