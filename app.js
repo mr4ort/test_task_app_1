@@ -149,6 +149,7 @@
   btnRemove.addEventListener('click', removeRows);
   table.addEventListener('dblclick', changeCell);
   tHead.addEventListener('click', sort);
+
 })();
 
 
