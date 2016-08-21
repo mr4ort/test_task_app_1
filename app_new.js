@@ -11,14 +11,12 @@ DataTable.prototype = {
     var tHead = table.querySelector('thead');
 
     table.addEventListener('dblclick', this.changeCell);
-    tHead.addEventListener('click', this.sort)
+    tHead.addEventListener('click', this.sort);
   },
   changeCell: function(e) {
     var elTag = e.target.tagName;
 
     if (elTag !== 'TD') return;
-
-    //table.editCell(e.target.parentElement.rowIndex, e.target.cellIndex);
 
     var table = this;
     var rowIndex = e.target.parentElement.rowIndex;
